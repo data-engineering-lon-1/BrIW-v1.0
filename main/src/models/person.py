@@ -4,3 +4,5 @@ class Person:
 
 def print_person(Person):
     print(Person)
+
+test = "test"
