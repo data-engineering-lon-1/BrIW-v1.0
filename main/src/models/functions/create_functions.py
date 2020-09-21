@@ -1,7 +1,7 @@
 import time
 import os
-from main.src.models.classes_for_app.round import Round, Person, Drink
-
+from main.src.models.classesforapp.round import Round, Person, Drink
+from main.src.services.pymysql import read_people_from_mydb, read_drinks_from_mydb
 
 # TODO: add dictionary as parameter 
 
@@ -26,8 +26,10 @@ def read_items(txt_file, person_or_drink):
         print(f"{txt_file} not found")
     return result
 
-names = read_items("main/src/models/functions/names.txt", "person")
-drinks = read_items("main/src/models/functions/drinks.txt", "drink")
+# names = read_items("main/src/models/functions/names.txt", "person")
+# drinks = read_items("main/src/models/functions/drinks.txt", "drink")
+names = read_people_from_mydb()
+drinks = read_drinks_from_mydb()
 favourite_drinks = {}
 
 def create_person(first_name):
@@ -38,6 +40,15 @@ def create_person(first_name):
     time.sleep(0.5)
     # print(names)
     return names.get(len(names))
+
+# assert person created
+def test_create_person(first_name):
+
+    actual_output = create_person(first_name)
+    expected_output = first_name
+
+    assert expected_output == actual_output
+    print("Success")
 
 def create_drink(drink):
     new_drink = Drink(drink)

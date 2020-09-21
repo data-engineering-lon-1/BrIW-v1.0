@@ -1,5 +1,5 @@
 import unittest
-from main.src.models.classes_for_app.round import Round, Person, Drink
+from main.src.models.classesforapp.round import Round, Person, Drink
 from unittest.mock import patch
 
 class Test_Classes(unittest.TestCase):

@@ -76,8 +76,8 @@ class Round:
 
 
 class Person:
-    def __init__(self, first_name):
-        self.firstName = first_name
+    def __init__(self, forename):
+        self.firstName = forename
         # self.lastName = last_name
         # self.full_name = self.firstName + " " + self.lastName
         # self.age = age

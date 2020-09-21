@@ -1,8 +1,6 @@
 import unittest
 from unittest.mock import patch, Mock
 
-from main.src.models.person import Person, print_person
-
 class Test_App(unittest.TestCase):
 
     @patch("builtins.print")
@@ -13,3 +11,4 @@ class Test_App(unittest.TestCase):
         print("example of something else to print")
 
         self.assertEqual(mocker.call_count, 2)
+

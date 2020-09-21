@@ -1,5 +1,5 @@
 import csv
-from main.src.models.classes_for_app.round import Round, Person, Drink
+from main.src.models.classesforapp.round import Round, Person, Drink
 from main.src.models.functions.create_functions import read_items, names, drinks
 
 
