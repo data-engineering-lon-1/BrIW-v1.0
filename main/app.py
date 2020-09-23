@@ -2,7 +2,7 @@ from main.src.models.classesforapp.round import Round, Person, Drink
 from main.src.models.functions.read_write_functions import csv_reader, csv_writer, csv_parser, csv_parser2, save_and_exit, write_items_list
 from main.src.models.functions.create_functions import create_person, create_drink, read_items, assign_fave_drinks, print_dict, clearScreen, favourite_drinks, names, drinks
 import main.src.models.persistence.csv_parser
-from main.src.services.pymysql import write_to_mysql_table_people
+from main.src.services.db import write_to_mysql_table_people, write_to_mysql_table_drink, write_fixed_sql
 import time
 import sys
 import unittest
@@ -73,7 +73,7 @@ Please, select an option by entering a number:
 [8] Exit
 Enter your selection: """
 
-# unit test for create_person
+
 
 
 # main app
@@ -148,7 +148,6 @@ if __name__ == '__main__':
                                     current_round.update_round(
                                         favourite_drinks)
                                     current_round.set_inactive()
-                                    # input("made it here")  #TODO: decide what's next
                                     nested_menu()
                                     break
                                 else:
@@ -180,5 +179,7 @@ if __name__ == '__main__':
     save_and_exit()
 
     write_to_mysql_table_people(names)
+    write_to_mysql_table_drink(drinks)
+    
 
     csv_writer("C:/Users/C Desktop/Documents/Generation Data Engineer Course/BriW app/BriW/persistence/assigned_drinks.csv", favourite_drinks)

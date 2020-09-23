@@ -93,9 +93,3 @@ class Drink:
 # beer = Drink("Beer", 3, 330, 5)
 
 # print(beer.price)
-
-# beer =
-# mocktail
-# tea
-# coffee
-# herbal

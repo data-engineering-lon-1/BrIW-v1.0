@@ -1,9 +1,12 @@
 import time
 import os
 from main.src.models.classesforapp.round import Round, Person, Drink
-from main.src.services.pymysql import read_people_from_mydb, read_drinks_from_mydb
+from main.src.services.db import read_people_from_mydb, read_drinks_from_mydb, write_favourite_drink_to_db
 
-# TODO: add dictionary as parameter 
+# TODO: add delete function
+# TODO: review classes
+# TODO: mocks, stubs, spies
+
 
 def read_items(txt_file, person_or_drink):
     result = {}
@@ -13,12 +16,12 @@ def read_items(txt_file, person_or_drink):
         lines = f.readlines()
         if person_or_drink == "person":
             for line in lines:
-                line = Person(line.replace("\n", "")).firstName            
+                line = Person(line.replace("\n", "")).firstName
                 result.update({key: line})
                 key += 1
         elif person_or_drink == "drink":
             for line in lines:
-                line = Drink(line.replace("\n", "")).drink           
+                line = Drink(line.replace("\n", "")).drink
                 result.update({key: line})
                 key += 1
         f.close()
@@ -26,11 +29,13 @@ def read_items(txt_file, person_or_drink):
         print(f"{txt_file} not found")
     return result
 
+
 # names = read_items("main/src/models/functions/names.txt", "person")
 # drinks = read_items("main/src/models/functions/drinks.txt", "drink")
 names = read_people_from_mydb()
 drinks = read_drinks_from_mydb()
 favourite_drinks = {}
+
 
 def create_person(first_name):
     first_name = Person(first_name)
@@ -42,6 +47,8 @@ def create_person(first_name):
     return names.get(len(names))
 
 # assert person created
+
+
 def test_create_person(first_name):
 
     actual_output = create_person(first_name)
@@ -50,12 +57,14 @@ def test_create_person(first_name):
     assert expected_output == actual_output
     print("Success")
 
+
 def create_drink(drink):
     new_drink = Drink(drink)
     new_drink = new_drink.drink
     drinks.update({len(drinks) + 1: new_drink.lower().capitalize()})
     print(f"{new_drink.lower().capitalize()} has been added!")
     time.sleep(0.5)
+
 
 def assign_fave_drinks():
     # clearScreen()
@@ -81,16 +90,18 @@ def assign_fave_drinks():
             print("Please enter a valid drinks ID")
             time.sleep(0.5)
             pass
-    # clearScreen()
     global favourite_drinks
     favourite_drinks[person] = drinks[drink_id]
+    write_favourite_drink_to_db(person_id, drink_id)
 
-# favourite_drinks = {}
 
 def clearScreen():
     os.system("cls")
 
+
 bar = "+============================"
+
+
 def print_dict(my_dict, header):
     print(f"{bar}+\n| {header.upper()}\n{bar}|")
     for key, value in my_dict.items():

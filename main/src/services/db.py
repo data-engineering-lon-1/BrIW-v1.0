@@ -1,6 +1,4 @@
-# from main.src.models.classesforapp.round import Round, Person, Drink
 import mysql.connector
-
 
 mydb = mysql.connector.connect(
     port='33066',
@@ -9,7 +7,6 @@ mydb = mysql.connector.connect(
     database='demo'
 )
 
-# print(mydb)
 mycursor = mydb.cursor()
 
 # John's example:
@@ -61,20 +58,79 @@ def read_drinks_from_mydb():
         key += 1
     return result
 
-# people_dict_from_db = read_people_from_mydb()
-# drinks_dict_from_db = read_drinks_from_mydb()
+def write_favourite_drink_to_db(person_id, drink_id):
+    person = person_id
+    print(person)
+    input()
+    drink = drink_id
+    print(drink)
+    input()
+    # person_drink_tuple = (drink,)
+    sql = f"UPDATE person SET drink = {drink} WHERE id = {person}"
+    print(sql)
+    input()
+    # sqlquery = f"UPDATE person (drink) VALUES ({drink})"
+    mycursor.execute(sql)
+    mydb.commit()
 
+    mycursor.execute("SELECT * FROM person")
+    myresult = mycursor.fetchall()
+    print(myresult)
+    input()
+    for x in myresult:
+        print(x)
+    input()
 
-# dict_from_app = {1: 'Ross', 2: 'Monica', 3: 'Joey', 4: 'Chandler', 5: 'Rachel', 6: 'Phoebe'}
+# ORIGINAL
+# def write_to_mysql_table_people(dict_from_app):
+    
+#     list_of_tuples = [(k, v) for k, v in dict_from_app.items()]
+    
+#     write_to_table = "REPLACE INTO person (id, forename) VALUES (%s, %s)"
+
+#     mycursor.executemany(write_to_table, list_of_tuples)
+#     mydb.commit()
+
 def write_to_mysql_table_people(dict_from_app):
-    # dict_from_app = {1: 'Ross', 2: 'Monica', 3: 'Joey', 4: 'Chandler', 5: 'Rachel', 6: 'Phoebe'}
+    
     list_of_tuples = [(k, v) for k, v in dict_from_app.items()]
-    # print(list_of_tuples)
-    write_to_table = "REPLACE INTO person (id, forename) VALUES (%s, %s)"
+    
+    write_to_table = "INSERT IGNORE INTO person (id, forename) VALUES (%s, %s)"
 
     mycursor.executemany(write_to_table, list_of_tuples)
     mydb.commit()
 
+    mycursor.execute("SELECT * FROM person")
+    myresult = mycursor.fetchall()
+    print(myresult)
+    input()
+    for x in myresult:
+        print(x)
+    input()
+
+def write_to_mysql_table_drink(dict_from_app):
+    list_of_tuples = [(k, v) for k, v in dict_from_app.items()]
+    write_to_table = "INSERT IGNORE INTO drink (id, name) VALUES (%s, %s)"
+
+    mycursor.executemany(write_to_table, list_of_tuples)
+    mydb.commit()
+
+    mycursor.execute("SELECT * FROM person")
+    myresult = mycursor.fetchall()
+    print(myresult)
+    input()
+    for x in myresult:
+        print(x)
+    input()
+
+# dict_example = {1 : ["Beer", 5, 500]}
+# not working yet
+def write_fixed_sql():
+    dict_example = {1 : ["Coke", 2, 330]}
+    write_to_table = "REPLACE INTO drink (id, name, price, volume) VALUES (%s, %s, %s, %s)"
+
+    mycursor.execute(write_to_table, dict_example)
+    mydb.commit()
 # example = {7: "James", 8: "Paul"}
 # write_to_mysql_table_people(dict_from_app)
 
