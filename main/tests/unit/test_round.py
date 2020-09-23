@@ -2,6 +2,7 @@ import unittest
 from main.src.models.classesforapp.round import Round, Person, Drink
 from unittest.mock import patch
 
+
 class Test_Classes(unittest.TestCase):
     def test_person(self):
 
@@ -18,7 +19,7 @@ class Test_Classes(unittest.TestCase):
         actual = Drink("Beer").drink
 
         self.assertEqual(expected, actual)
-    
+
 
 if __name__ == "__main__":
     unittest.main()

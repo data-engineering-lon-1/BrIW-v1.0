@@ -67,7 +67,6 @@ def create_drink(drink):
 
 
 def assign_fave_drinks():
-    # clearScreen()
     print_dict(names, "names")
     person_id = "not a key"
     while person_id not in names:

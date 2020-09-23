@@ -2,13 +2,14 @@ from main.src.models.classesforapp.round import Round, Person, Drink
 from main.src.models.functions.read_write_functions import csv_reader, csv_writer, csv_parser, csv_parser2, save_and_exit, write_items_list
 from main.src.models.functions.create_functions import create_person, create_drink, read_items, assign_fave_drinks, print_dict, clearScreen, favourite_drinks, names, drinks
 import main.src.models.persistence.csv_parser
-from main.src.services.db import write_to_mysql_table_people, write_to_mysql_table_drink, write_fixed_sql
+from main.src.services.db import write_to_mysql_table_people, write_to_mysql_table_drink, read_favourites_from_mydb
 import time
 import sys
 import unittest
 from unittest.mock import Mock
 sys.path.append(".")
 sys.path.append('main')
+
 
 # TODO: create Person objects out of names drawn in line by line?
 
@@ -74,13 +75,12 @@ Please, select an option by entering a number:
 Enter your selection: """
 
 
-
-
 # main app
 # TODO: save final order for round
 # TODO: give option to go back to menu and show message saying round has been sent off
-# TODO: replace csv_reader for favourite drinks with mysql
-csv_reader("C:/Users/C Desktop/Documents/Generation Data Engineer Course/bapp/main/src/models/persistence/assigned_drinks.csv", favourite_drinks)
+
+favourite_drinks = read_favourites_from_mydb()
+# csv_reader("C:/Users/C Desktop/Documents/Generation Data Engineer Course/bapp/main/src/models/persistence/assigned_drinks.csv", favourite_drinks)
 
 if __name__ == '__main__':
     user_input = " "
@@ -93,9 +93,11 @@ if __name__ == '__main__':
             print_dict(drinks, "Drinks")
             nested_menu()
         elif user_input == "3":
+            favourite_drinks = read_favourites_from_mydb()
             assign_fave_drinks()
             check_user_input()
         elif user_input == "4":
+            favourite_drinks = read_favourites_from_mydb()
             print_dict(favourite_drinks, "favourite drinks")
             nested_menu()
         elif user_input == "5":
@@ -180,6 +182,5 @@ if __name__ == '__main__':
 
     write_to_mysql_table_people(names)
     write_to_mysql_table_drink(drinks)
-    
 
     csv_writer("C:/Users/C Desktop/Documents/Generation Data Engineer Course/BriW app/BriW/persistence/assigned_drinks.csv", favourite_drinks)
