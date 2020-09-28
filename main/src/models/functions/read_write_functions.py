@@ -1,6 +1,6 @@
 import csv
 from main.src.models.classesforapp.round import Round, Person, Drink
-from main.src.models.functions.create_functions import read_items, names, drinks
+from main.src.models.functions.create_functions import read_items
 
 
 
@@ -45,7 +45,3 @@ def write_items_list(txt_file, items_dict):
             f.write(line + "\n")
     finally:
         f.close()
-
-def save_and_exit():
-    write_items_list("main/src/models/functions/names.txt", names)
-    write_items_list("main/src/models/functions/drinks.txt", drinks)
