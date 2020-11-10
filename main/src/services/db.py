@@ -9,8 +9,6 @@ def connect_db():
     )
     return mydb
 
-# mycursor = mydb.cursor()
-
 def read_people_from_mydb():
     mydb = connect_db()
     mycursor = mydb.cursor()
@@ -31,7 +29,6 @@ def delete_person_from_mydb(name_id):
     mycursor = mydb.cursor()
     mycursor.execute(f"DELETE FROM person WHERE id = {name_id}")
     mydb.commit()
-    # print(f"Unable to delete record with id: {id}. Please try again.")
     mycursor.close()
     mydb.close()
 
@@ -40,7 +37,6 @@ def delete_drink_from_mydb(drink_id):
     mycursor = mydb.cursor()
     mycursor.execute(f"DELETE FROM drink WHERE id = {drink_id}")
     mydb.commit()
-    # print(f"Unable to delete record with id: {id}. Please try again.")
     mycursor.close()
     mydb.close()
 
@@ -135,9 +131,7 @@ class Drink:
         # self.abv = abv
 
 class Round:
-    # whose_round = ""
     total_price = 0
-    # active = False
     drink_person_dict = {}
     drink = ""
     name = ""

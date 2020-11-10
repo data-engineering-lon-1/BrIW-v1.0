@@ -10,12 +10,7 @@ class Test_App(unittest.TestCase):
         dict_example = {1: "Tom", 2: "Boy"}
         print_dict(dict_example, "Test table")
 
-        self.assertEqual(mocker.call_count, 4)
-    
-    
-
-
-
+        self.assertEqual(mocker.call_count, 5)
 
 if __name__ == '__main__':
     unittest.main()

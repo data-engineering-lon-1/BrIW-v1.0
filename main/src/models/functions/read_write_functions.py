@@ -1,7 +1,8 @@
+import sys
+sys.path.append('C:/Users/C Desktop/Documents/Generation Data Engineer Course/bapp')
 import csv
 from main.src.models.classesforapp.round import Round, Person, Drink
 from main.src.models.functions.create_functions import read_items
-
 
 
 def csv_reader(csv_file, dict_file):

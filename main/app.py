@@ -50,7 +50,6 @@ def nested_menu():
 def is_id_valid(id, my_dict):
     return int(id) in my_dict
 
-
 round_order = {}
 go_to_menu = "Would you like to return to the main menu? Y/N "
 exit_offer = "Would you like to exit the app? Y/N "
@@ -68,7 +67,6 @@ Please, select an option by entering a number:
 [9] Delete drink record
 [10] Exit
 Enter your selection: """
-
 
 if __name__ == '__main__':
     user_input = " "
@@ -136,7 +134,7 @@ if __name__ == '__main__':
                                     final_order_return = current_round.return_order(
                                         favourite_drinks)
                                     print_dict(final_order_return,
-                                               f"{round_select}'s round")
+                                            f"{round_select}'s round")
                                     current_round.update_round(
                                         favourite_drinks)
                                     current_round.set_inactive()

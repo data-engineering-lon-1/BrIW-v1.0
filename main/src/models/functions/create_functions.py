@@ -1,12 +1,9 @@
+import sys
+sys.path.append('.')
 import time
 import os
 from main.src.models.classesforapp.round import Round, Person, Drink
 from main.src.services.db import read_people_from_mydb, read_drinks_from_mydb, read_favourites_from_mydb, write_favourite_drink_to_db, write_to_mysql_table_people, write_to_mysql_table_drink
-
-# TODO: add delete function
-# TODO: review classes
-# TODO: mocks, stubs, spies
-
 
 def read_items(txt_file, person_or_drink):
     result = {}
@@ -29,13 +26,7 @@ def read_items(txt_file, person_or_drink):
         print(f"{txt_file} not found")
     return result
 
-
-# names = read_items("main/src/models/functions/names.txt", "person")
-# drinks = read_items("main/src/models/functions/drinks.txt", "drink")
-# names = read_people_from_mydb()
-# drinks = read_drinks_from_mydb()
 favourite_drinks = {}
-
 
 def create_person(first_name):
     names = read_people_from_mydb()
@@ -44,10 +35,8 @@ def create_person(first_name):
     names.update({len(names) + 1: first_name.lower().capitalize()})
     print(f"{first_name.lower().capitalize()} has been added!")
     time.sleep(0.5)
-    # return names.get(len(names))
     write_to_mysql_table_people(names)
 
-# assert person created
 def test_create_person(first_name):
 
     actual_output = create_person(first_name)
@@ -62,8 +51,6 @@ def create_drink(drink):
     new_drink = Drink(drink)
     new_drink = new_drink.drink
     drinks.update({len(drinks) + 1: new_drink.lower().capitalize()})
-    print(drinks)
-    input()
     print(f"{new_drink.lower().capitalize()} has been added!")
     time.sleep(0.5)
     write_to_mysql_table_drink(drinks)
@@ -95,7 +82,6 @@ def assign_fave_drinks():
             time.sleep(0.5)
             pass
     global favourite_drinks
-    # favourite_drinks = read_favourites_from_mydb()
     favourite_drinks[person] = drinks[drink_id]
     write_favourite_drink_to_db(person_id, drink_id)
 
@@ -112,3 +98,5 @@ def print_dict(my_dict, header):
     for key, value in my_dict.items():
         print(f"| {key} {value}")
     print(f"{bar}+\n")
+
+
